@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <!-- style -->
+    <link rel="stylesheet" type="text/css" href="Public/dist/css/share.min.css">
+    <!-- iconfont -->
+    <link rel="stylesheet" type="text/css" href="Public/dist/plugins/iconfont/iconfont.css">
+    <!-- According to the screen automatically set the font size -->
+    <script src="Public/dist/js/factory/accordingScreenAutoSetFontSize.js"></script>
+</head>
+<body>
+    <article class="uui-share-container" id="J_share_container">
+        <div class="uui-share-bg J_share_bg"></div>
+
+        <!-- header -->
+        <header class="uui-share-header">
+            <div class="uui-share-wrapper clearfix">
+
+                <a class="uui-share-logo"></a>
+                <div class="uui-share-txt">
+                    <p>下载宝贝家父母客服端</p>
+                    <p>给孩子好的~</p>
+                </div>
+                <a class="uui-share-downbtn" id="J_share_downbtn">立即下载</a>
+
+            </div>
+        </header>
+
+        <!-- player -->
+        <div class="uui-share-player-wrapper">
+            <section class="uui-share-player">
+                
+                <div class="uui-player-img J_player_img">
+                    <div class="uui-audio-name J_audio_name">小魔女的泡泡</div>
+                </div>
+
+                <div class="uui-player-control">
+                    <!-- <div class="uui-audio-progressbar"></div>
+                    <div class="uui-audio-duration clearfix">
+                        <span>1:30</span>
+                        <span>3:20</span>
+                    </div>
+                    <div class="uui-audio-switch">
+                        <a class="uui-audio-switchbtn iconfont icon-zanting"></a>
+                    </div> -->
+                    <div id="player"></div>
+                </div>
+
+            </section>
+        </div>
+
+        <!-- footer -->
+        <footer class="uui-share-footer">
+            <div class="uui-share-wrapper clearfix">
+                <section class="uui-footer-box">
+                    <span class="uui-barcode-btn iconfont icon-erweima J_barcode"></span>
+                    <a class="uui-share-more" id="J_share_more" href="ubabyapp://">
+                        <span class="uui-more-erji iconfont icon-erji"></span>
+                        <span>收听更多节目</span>
+                    </a>
+                </section>
+            </div>
+        </footer>
+
+        <!-- 二维码遮罩 -->
+        <section class="uui-share-shade J_share_shade">
+            <div class="uui-barcode-box">
+                <span class="uui-shade-close iconfont icon-guanbi J_shade_close"></span>
+                <div class="uui-shade-wrapper">
+                    <img src="Public/dist/images/barcode.jpg" width="100%">
+                    <p class="uui-follow-txt">关注优彼ubbie公众号</p>
+                    <p class="uui-follow-direct">长按二维码识别关注</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- wx 在浏览器中打开 -->
+        <section class="uui-open-browser J_open_browser">
+            <img id="J_ios_wx" src="Public/dist/images/mobie-ios-wx.png">
+            <img id="J_android_wx" src="Public/dist/images/mobile-android-wx.png">
+        </section>
+    </article>
+
+    <!-- script -->
+    <script src="Public/dist/plugins/zepto/zepto.min.js"></script>
+
+    <!-- h5player -->
+    <!-- <link rel="stylesheet" type="text/css" href="Public/dist/plugins/h5player/player.css"> -->
+    <script src="Public/dist/plugins/h5player/player.js"></script>
+    <script>
+        function injectScript(src) {
+            var s = document.createElement('script');
+            s.src = src;
+            s.onload = function () {
+              document.body.removeChild(s);
+            };
+            document.body.appendChild(s);
+        }
+
+        var container = document.getElementById('player');
+        player = new Player({
+            container: container,
+        });
+        injectScript('http://172.17.11.147:8080/uplay/restapi/v2/share?qp=MTAw&ts=1234567890&sign=153AC759DDB863ABAD837FC42D27FBCB');
+        // injectScript('http://gerald.top/~music/163/playlist/66163538?jsonp=init');
+        window.init = function(songs) {
+            player.setSongs(songs);
+            player.play(0);
+        };
+    </script>
+
+    <script>
+        $(function(){
+            //全局变量
+            //useragent
+            var oUserAgent = navigator.userAgent.toLowerCase();
+            //android 下载链接
+            var androidDownloadURL = 'http://www.baidu.com';
+            //iso 下载链接
+            var isoDownloadURL = 'itms://itunes.apple.com/cn/app/bao-bei-jia-you-jiao/id1049716321?mt=8';
+
+            /**
+             * [barcode 二维码的弹出/关闭 只有在微信浏览器中显示二维码按钮]
+             * @return {[type]} [description]
+             */
+            function barcode(){
+                if (oUserAgent.match(/micromessenger/i) == 'micromessenger') {
+                    $('.J_barcode').show();
+                };
+
+                //open
+                $('.J_barcode').click(function(){
+                    $('.J_share_shade').css({'opacity': 1, 'z-index': 5});
+                })
+
+                //close
+                $('.J_shade_close').click(function(){
+                    $('.J_share_shade').css({'opacity': 0, 'z-index': 1});
+                })
+            }
+            barcode();
+
+
+           /**
+            * 1.尝试打开对应的app
+            * 2.打开失败判断是否在微信浏览器中
+            * 3.如果在微信浏览器中则弹出在浏览器中打开
+            */
+            function openApp(){
+                return function(){
+                    var clickedAt = +new Date;  
+
+                    setTimeout(function(){
+                         
+                        if (+new Date - clickedAt < 3000){
+                            //微信环境中
+                            if (oUserAgent.match(/micromessenger/i) == 'micromessenger') {
+                                // alert('在浏览器中打开');
+                                $('.J_open_browser').css({'opacity': 1, 'z-index': 5});
+                                if (oUserAgent.match(/android/i) == 'android') {
+                                    $('#J_android_wx').show();
+                                }
+                                if (oUserAgent.match(/iphone/i) == 'iphone') {
+                                    $('#J_ios_wx').show();
+                                }
+                                return false;
+                            }else{
+                                //没有app 的android环境中
+                                if (oUserAgent.match(/android/i) == 'android') {
+                                    window.location.href = androidDownloadURL;
+                                }
+                                //没有app 的iso环境中
+                                if (oUserAgent.match(/iphone/i) == 'iphone') {
+                                    window.location.href = isoDownloadURL;
+                                }
+                            } 
+                        }  
+                    }, 2000);      
+                };
+            }  
+
+            document.getElementById('J_share_more').onclick = openApp();
+            document.getElementById('J_share_downbtn').onclick = openApp();
+
+        })
+
+
+
+        //iOS系统的移动设备中，需要在按钮元素或body/html上绑定一个touchstart事件才能激活:active状态
+        document.body.addEventListener('touchstart', function () {})
+    </script>
+
+    <!-- // <script src="http://172.17.11.61:8080/target/target-script-min.js#anonymous"></script> -->
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <!-- style -->
+    <link rel="stylesheet" type="text/css" href="Public/dist/css/share.min.css">
+    <!-- iconfont -->
+    <link rel="stylesheet" type="text/css" href="Public/dist/plugins/iconfont/iconfont.css">
+    <style>
+        /*横屏*/
+        /*.uui-share-header{
+            display: none;
+        }
+        .uui-share-player-wrapper{
+            height: 52%;
+            top: 10%;
+        }
+        .uui-share-player-wrapper .uui-share-player{
+            width: 70%;
+            height: 100%;
+            position: relative;
+        }
+        .uui-share-player-wrapper .uui-share-player .uui-player-img{
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 2.11rem;
+            width: 2.11rem;
+            border-radius: .08rem 0 0 0.08rem;
+        }
+        .uui-share-player-wrapper .uui-share-player .uui-player-img .uui-audio-name{
+            position: absolute;
+            top: .7rem;
+            left: 120%;
+            width: 100%;
+            height: .16rem;
+            line-height: .16rem;
+            color: #666;
+            font-size: .18rem;
+            text-indent: 0; 
+            background: none;
+        }
+        .h5p-normal{
+            height: 1.83rem;
+            position: absolute;
+            right: .2rem;
+            top: 0;
+            width: 2.56rem;
+        }
+        .uui-share-player-wrapper .uui-share-player .uui-player-control .uui-audio-progressbar{
+            position: absolute;
+            top: 86%
+        }
+        .uui-share-player-wrapper .uui-share-player .uui-player-control .uui-audio-duration{
+            position: absolute;
+            top: 92%;
+            font-size: .14rem;
+        }
+        .uui-share-player-wrapper .uui-share-player .uui-player-control .uui-audio-switch{
+            position: absolute;
+            top: 28%;
+            text-align: right;
+        }
+        .uui-share-player-wrapper .uui-share-player .uui-player-control .uui-audio-switch .iconfont{
+            font-size: .62rem;
+        }
+
+        .uui-share-shade .uui-barcode-box{
+            height: 2.85rem;
+            width: 2.4rem;
+        }
+        .uui-share-shade .uui-barcode-box .uui-shade-close{
+            font-size: .3rem;
+        }
+        .uui-share-shade .uui-barcode-box .uui-shade-wrapper{
+            width: 1.6rem;
+            height: 2rem;
+            margin: .4rem auto 0;
+        }
+        .uui-share-shade .uui-barcode-box .uui-shade-wrapper .uui-follow-txt{
+            font-size: .12rem;
+        }
+        .uui-share-shade .uui-barcode-box .uui-shade-wrapper .uui-follow-direct{
+            font-size: .1rem;
+        }       
+
+
+        .uui-share-footer{
+            height: 26.5%;
+        }
+        .uui-share-footer .uui-footer-box{
+            position: relative;
+        }
+        .uui-share-footer .uui-footer-box .uui-share-more{
+            height: 0.6rem;
+            width: 70%;
+            margin-top: .25rem;
+            margin-left: 15%;
+            background-color: #fff;
+            color: #ea5404;
+            font-size: .2rem;
+            line-height: .6rem;
+            border-radius: .6rem;
+        }
+        .uui-share-footer .uui-footer-box .uui-share-more .uui-more-erji{
+            font-size: .3rem;
+        }
+        .uui-share-footer .uui-footer-box .uui-barcode-btn{
+            font-size: .3rem;
+            position: absolute;
+            left: .2rem;
+            top: .35rem;
+            margin-top: 0;
+        }*/
+    </style>
+</head>
+<body>
+<article class="uui-share-container" id="J_share_container">
+    <div class="uui-share-bg J_share_bg"></div>
+    <div class="uui-share-bg1"></div>
+
+    <!-- header -->
+    <header class="uui-share-header">
+        <div class="uui-share-wrapper clearfix">
+
+            <a class="uui-share-logo"></a>
+
+            <div class="uui-share-txt">
+                <p>下载宝贝家父母客户端</p>
+
+                <p>给孩子好的~</p>
+            </div>
+            <a class="uui-share-downbtn" id="J_share_downbtn">立即下载</a>
+
+        </div>
+    </header>
+
+    <!-- player -->
+    <div class="uui-share-player-wrapper">
+        <section class="uui-share-player">
+
+            <div class="uui-player-img J_player_img">
+                <div class="uui-audio-name J_audio_name"></div>
+            </div>
+
+            <div class="uui-player-control">
+                <div id="player"></div>
+            </div>
+
+        </section>
+    </div>
+
+    <!-- footer -->
+    <footer class="uui-share-footer">
+        <div class="uui-share-wrapper clearfix">
+            <section class="uui-footer-box">
+                <span class="uui-barcode-btn iconfont icon-erweima J_barcode"></span>
+                <a class="uui-share-more" id="J_share_more">
+                    <span class="uui-more-erji iconfont icon-erji"></span>
+                    <span>收听更多节目</span>
+                </a>
+            </section>
+        </div>
+    </footer>
+
+    <!-- 二维码遮罩 -->
+    <section class="uui-share-shade J_share_shade">
+        <div class="uui-barcode-box">
+            <span class="uui-shade-close iconfont icon-guanbi J_shade_close"></span>
+
+            <div class="uui-shade-wrapper">
+                <img src="Public/dist/images/barcode.jpg" width="100%">
+
+                <p class="uui-follow-txt">关注优彼ubbie公众号</p>
+
+                <p class="uui-follow-direct">长按二维码识别关注</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- wx 在浏览器中打开 -->
+    <section class="uui-open-browser J_open_browser">
+        <img id="J_ios_wx" src="Public/dist/images/mobie-ios-wx.png">
+        <img id="J_android_wx" src="Public/dist/images/mobile-android-wx.png">
+    </section>
+</article>
+
+<!-- According to the screen automatically set the font size -->
+<script src="Public/dist/js/factory/accordingScreenAutoSetFontSize.js"></script>
+
+<!-- script -->
+<script src="Public/dist/plugins/zepto/zepto.min.js"></script>
+<script src="Public/dist/js/crypto-md5.js"></script>
+
+<!-- h5player -->
+<!-- <link rel="stylesheet" type="text/css" href="Public/dist/plugins/h5player/player.css"> -->
+<script src="Public/dist/plugins/h5player/player.js"></script>
+
+<script>
+    function injectScript(src) {
+        var s = document.createElement('script');
+        s.src = src;
+        s.onload = function () {
+            document.body.removeChild(s);
+        };
+        document.body.appendChild(s);
+    }
+
+    var container = document.getElementById('player');
+    player = new Player({
+        container: container
+    });
+
+    // injectScript('http://172.17.11.147:8080/uplay/restapi/v2/share?' + _q);
+    injectScript('http://gerald.top/~music/163/playlist/66163538?jsonp=init');
+    
+    window.init = function (songs) {
+        player.setSongs(songs);
+        player.play(0);
+        // player.play(1);
+        // player.play(2);
+    };
+</script>
+
+<script>
+    $(function () {
+        //全局变量
+        // h5下载页
+        var DownloadURL = 'http://app.ubaby.cn/parents/';
+        //iso 下载链接
+        var isoDownloadURL = 'https://itunes.apple.com/cn/app/bao-bei-jia-you-jiao/id1049716321?mt=8';
+
+        /**          
+        * 浏览器信息
+        * @type {Object}
+        * @return {Boolean}  返回布尔值     
+        */
+        function UA() {
+            var u = navigator.userAgent.toLowerCase();
+
+            return {
+                isWeibo : u.match(/weibo/i) == 'weibo',
+                isWeixin : u.match(/micromessenger/i) == 'micromessenger',
+                isAndroid : u.match(/android/i) == 'android',
+                isIphone : u.match(/iphone/i) == 'iphone',
+                isQq : u.match(/qq/i) == 'qq',
+                isQzone : u.match(/qzone/i) == 'qzone',
+            };
+        }
+
+        /**
+         * [openApp 打开app]
+         * @return {[type]} [description]
+         */
+        function openApp() {
+            return function () {
+                
+                if (UA().isWeibo) { //weibo
+
+                    $('.J_open_browser').css({'opacity': 1, 'z-index': 5});
+                    if (UA().isAndroid) { //anroid
+                        $('#J_android_wx').show();
+                    }else if (UA().isIphone) { //iphone
+                        $('#J_ios_wx').show();
+                    }
+                    return false;
+
+                }else if (UA().isWeixin) { //weixin
+
+                    window.location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=cn.ubaby.ubaby&g_f=991653";
+
+                }else if (UA().isQzone) { //qzone
+
+                    $('.J_open_browser').css({'opacity': 1, 'z-index': 5});
+                    if (UA().isAndroid) { //anroid
+                        $('#J_android_wx').show();
+                    }else if (UA().isIphone) { //iphone
+                        $('#J_ios_wx').show();
+                    }
+                    return false;
+
+                }else{ //other brower
+                    setTimeout(function () {
+                        // alert(document.webkitHidden);
+                        if (!document.webkitHidden) {
+                           
+                            if (UA().isAndroid) { //anroid
+                                window.location.href = DownloadURL;
+                            }else if (UA().isIphone) { //iphone
+                                window.location.href = isoDownloadURL;
+                            }
+                        }
+                    }, 1000);
+
+                    if (UA().isAndroid) { //anroid
+                        var hiddenIframe = document.createElement('iframe');
+                        hiddenIframe.src = 'ubabyapp://';
+                        hiddenIframe.style.display = 'none';
+                        document.body.appendChild(hiddenIframe);
+                        // window.location.href = "ubabyapp://";
+                    }else if (UA().isIphone) { //iphone
+                        window.location.href = "ubabyapp://";
+                    }
+                }
+
+            };
+        }
+
+        document.getElementById('J_share_more').onclick = openApp();
+        document.getElementById('J_share_downbtn').onclick = openApp();
+
+        /**
+         * [barcode 二维码的弹出/关闭 只有在微信浏览器中显示二维码按钮]
+         * @return {[type]} [description]
+         */
+        function barcode() {
+            if (UA().isWeixin) {
+                $('.J_barcode').show();
+            }
+
+            //open
+            $('.J_barcode').click(function () {
+                $('.J_share_shade').css({'opacity': 1, 'z-index': 5});
+            })
+
+            //close
+            $('.J_shade_close').click(function () {
+                $('.J_share_shade').css({'opacity': 0, 'z-index': 1});
+            })
+        }
+        barcode();
+    })
+
+
+    //iOS系统的移动设备中，需要在按钮元素或body/html上绑定一个touchstart事件才能激活:active状态
+    document.body.addEventListener('touchstart', function () {})
+</script>
+
+<!-- <script src="http://172.17.11.61:8080/target/target-script-min.js#anonymous"></script> -->
+</body>
+</html>

@@ -1,0 +1,362 @@
+@charset "UTF-8";
+/**
+ * reset
+ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+a {
+  text-decoration: none; }
+
+li {
+  list-style: none; }
+
+img {
+  vertical-align: middle;
+  border: 0; }
+
+html {
+  font-size: 100px; }
+
+body {
+  font-size: 16px;
+  font-family: "Microsoft Yahei"; }
+
+input[type="text"],
+input[type="submit"],
+input[type="botton"] {
+  -webkit-appearance: none;
+  outline: none; }
+
+/*去除android a/button/input标签被点击时产生的边框 & 去除ios a标签被点击时产生的半透明灰色背景*/
+a, button, input, div {
+  -webkit-tap-highlight-color: rgba(255, 0, 0, 0); }
+
+.clearfix:after {
+  display: block;
+  content: '';
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  clear: both; }
+
+.clearfix {
+  zoom: 1; }
+
+/**
+ * variable
+ */
+.uui-share-container {
+  max-width: 750px;
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  overflow: hidden; }
+
+.uui-share-bg {
+  height: 100%;
+  width: 100%;
+  background-color: #c1ccd1;
+  /*background: url(../images/audio_img.jpg);*/
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(0.15rem);
+  -webkit-filter: blur(0.15rem);
+  -moz-filter: blur(0.15rem);
+  -o-filter: blur(0.15rem);
+  -ms-filter: blur(0.15rem); }
+
+.uui-share-bg1 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  top: 0;
+  left: 0; }
+
+.uui-share-wrapper {
+  padding: 0 .1rem;
+  height: 100%; }
+
+/**
+ * header
+ */
+.uui-share-header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 12.5%;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.3);
+  /*box-shadow: 0 1px 10px #e8e8e8;*/ }
+  .uui-share-header .uui-share-wrapper {
+    padding: 0 .1rem;
+    height: .35rem;
+    margin-top: .08rem; }
+  .uui-share-header .uui-share-logo {
+    display: inline-block;
+    height: .35rem;
+    width: .35rem;
+    background: url(../images/logo.png) no-repeat center center;
+    background-size: 100% 100%;
+    float: left; }
+  .uui-share-header .uui-share-txt {
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    padding: 0 .1rem;
+    float: left;
+    color: #fff;
+    text-shadow: 0 0 2px #ccc; }
+    .uui-share-header .uui-share-txt p:first-child {
+      font-size: .09rem;
+      margin-top: .05rem; }
+    .uui-share-header .uui-share-txt p:last-child {
+      font-size: .085rem; }
+  .uui-share-header .uui-share-downbtn {
+    float: right;
+    display: inline-block;
+    height: .22rem;
+    width: .6rem;
+    margin-top: .06rem;
+    text-align: center;
+    line-height: .22rem;
+    color: #fff;
+    font-size: .08rem;
+    border-radius: .1rem;
+    background-color: #ea5404; }
+    .uui-share-header .uui-share-downbtn:active {
+      background-color: #AD3600; }
+
+/**
+ * player
+ */
+.uui-share-player-wrapper {
+  width: 100%;
+  height: 73.5%;
+  /*background: #ccc;*/
+  position: absolute;
+  top: 12.5%; }
+  .uui-share-player-wrapper .uui-share-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    z-index: 2;
+    width: 70%;
+    height: 81%;
+    border-radius: .08rem;
+    background: #fff;
+    box-sizing: content-box;
+    box-shadow: 0 0 0 0.04rem rgba(255, 255, 255, 0.4); }
+    .uui-share-player-wrapper .uui-share-player .uui-player-img {
+      position: relative;
+      width: 100%;
+      height: 1.7rem;
+      border-radius: .08rem .08rem 0 0;
+      /*background-image: url(../images/audio_img.jpg);*/
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover; }
+      .uui-share-player-wrapper .uui-share-player .uui-player-img .uui-audio-name {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: .16rem;
+        line-height: .16rem;
+        color: #fff;
+        font-size: .09rem;
+        text-indent: .05rem;
+        background: rgba(0, 0, 0, 0.5); }
+    .uui-share-player-wrapper .uui-share-player .uui-player-control .uui-audio-progressbar {
+      height: .06rem;
+      width: 100%;
+      background-color: #e1e1e1;
+      position: relative; }
+      .uui-share-player-wrapper .uui-share-player .uui-player-control .uui-audio-progressbar .h5p-played {
+        position: absolute;
+        top: 0;
+        height: .06rem;
+        background: #ea5404; }
+      .uui-share-player-wrapper .uui-share-player .uui-player-control .uui-audio-progressbar .h5p-cursor {
+        box-sizing: content-box;
+        position: absolute;
+        top: -.1rem;
+        margin-left: -.13rem;
+        border: .1rem solid transparent;
+        width: .06rem;
+        height: .06rem;
+        opacity: 0; }
+      .uui-share-player-wrapper .uui-share-player .uui-player-control .uui-audio-progressbar .h5p-cursor a {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #ffffff;
+        width: .06rem;
+        height: .06rem;
+        border-radius: 50%;
+        cursor: pointer; }
+    .uui-share-player-wrapper .uui-share-player .uui-player-control .uui-audio-duration {
+      height: .18rem;
+      width: 100%;
+      padding: 0 .05rem;
+      line-height: .18rem;
+      color: #999;
+      font-size: .08rem; }
+      .uui-share-player-wrapper .uui-share-player .uui-player-control .uui-audio-duration span:first-child {
+        float: left; }
+      .uui-share-player-wrapper .uui-share-player .uui-player-control .uui-audio-duration span:last-child {
+        float: right; }
+    .uui-share-player-wrapper .uui-share-player .uui-player-control .uui-audio-switch {
+      height: .48rem;
+      width: 100%;
+      /*background-color: #333;*/
+      text-align: center;
+      /*.icon-zanting2{
+                    position: relative;
+                    left: 0.013rem;
+                    top: -0.018rem;
+                    font-size: .145rem;
+                }*/ }
+      .uui-share-player-wrapper .uui-share-player .uui-player-control .uui-audio-switch .uui-audio-switchbtn {
+        display: inline-block;
+        height: .4rem;
+        width: .4rem;
+        background-color: #ea5404;
+        border-radius: 50%;
+        border: .03rem solid #eeeeee;
+        font-size: .2rem;
+        color: #fff;
+        text-align: center;
+        line-height: 1.7; }
+        .uui-share-player-wrapper .uui-share-player .uui-player-control .uui-audio-switch .uui-audio-switchbtn:active {
+          background-color: #AD3600;
+          border-color: #DFDFDF; }
+      .uui-share-player-wrapper .uui-share-player .uui-player-control .uui-audio-switch .iconfont {
+        font-size: .38rem;
+        position: relative;
+        top: -0.06rem;
+        color: #ea5404; }
+
+/**
+ * footer
+ */
+.uui-share-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 14%;
+  background: #ea5404;
+  z-index: 2; }
+  .uui-share-footer .uui-footer-box {
+    height: 100%;
+    width: 100%; }
+    .uui-share-footer .uui-footer-box .uui-barcode-btn {
+      display: inline-block;
+      display: none;
+      font-size: .16rem;
+      color: #fff;
+      margin-top: .18rem;
+      float: left; }
+      .uui-share-footer .uui-footer-box .uui-barcode-btn:active {
+        color: #DADADA; }
+    .uui-share-footer .uui-footer-box .uui-share-more {
+      float: left;
+      display: inline-block;
+      height: .3rem;
+      width: 70%;
+      margin-top: .13rem;
+      margin-left: 15%;
+      background-color: #fff;
+      color: #ea5404;
+      font-size: .1rem;
+      line-height: .3rem;
+      text-align: center;
+      border-radius: .15rem; }
+      .uui-share-footer .uui-footer-box .uui-share-more .uui-more-erji {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: .2rem; }
+      .uui-share-footer .uui-footer-box .uui-share-more:active {
+        background-color: #DADADA; }
+
+/**
+ * 二维码弹出层
+ */
+.uui-share-shade {
+  opacity: 0;
+  transition: opacity .5s;
+  -moz-transition: opacity .5s;
+  -webkit-transition: opacity .5s;
+  -o-transition: opacity .5s;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1; }
+  .uui-share-shade .uui-barcode-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    height: 1.65rem;
+    width: 1.4rem;
+    background-color: #fff;
+    border-radius: .1rem; }
+    .uui-share-shade .uui-barcode-box .uui-shade-close {
+      position: absolute;
+      top: .06rem;
+      right: .06rem;
+      font-size: .14rem;
+      color: #e1e1e1; }
+    .uui-share-shade .uui-barcode-box .uui-shade-wrapper {
+      width: 1rem;
+      height: 1.3rem;
+      margin: 0 auto;
+      margin-top: .2rem;
+      text-align: center;
+      /*background-color: #333;*/ }
+      .uui-share-shade .uui-barcode-box .uui-shade-wrapper .uui-follow-txt {
+        font-size: .08rem;
+        color: #999; }
+      .uui-share-shade .uui-barcode-box .uui-shade-wrapper .uui-follow-direct {
+        line-height: 3;
+        font-size: .05rem;
+        color: #ea5404; }
+
+/**
+ * uui-open-browser 在浏览器中打开遮罩
+ */
+.uui-open-browser {
+  opacity: 0;
+  transition: opacity .5s;
+  -moz-transition: opacity .5s;
+  -webkit-transition: opacity .5s;
+  -o-transition: opacity .5s;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1; }
+  .uui-open-browser img {
+    position: fixed;
+    top: .1rem;
+    right: .1rem;
+    width: 50%;
+    display: none;
+    z-index: 6; }
